@@ -44,7 +44,7 @@ public class newPlayLevel {
     public newPlayLevel(Stage primaryStage, Scene scene1,StackPane layout)  {
         this.layout = layout;
         GamePlaystage = new Stage();
-        Image background = new Image("file:E:/code/TheMazeRunner/src/main/java/image/newplaylv1.png");
+        Image background = new Image(Links.BGNEWPLAYLV_PATH);
         ImageView backgroundView = new ImageView(background);
         backgroundView.fitWidthProperty().bind(primaryStage.widthProperty());// làm như này thì nền mới full cửa sổ được
         backgroundView.fitHeightProperty().bind(primaryStage.heightProperty());
@@ -55,13 +55,13 @@ public class newPlayLevel {
         // Tạo nút Back
         Button backButton = new Button();
         backButton.getStyleClass().add("back-button");
-        Image image = new Image("file:E:/code/TheMazeRunner/src/main/java/image/back.png");
+        Image image = new Image(Links.BACKBUTTON_PATH);
         ImageView imageView = new ImageView(image);
         backButton.setGraphic(imageView);
         layout.getChildren().add(imageView);
         layout.getChildren().add(backButton);
 
-        sceneNewPlatlevel.getStylesheets().add("file:E:/code/TheMazeRunner/src/main/java/style.css");
+        sceneNewPlatlevel.getStylesheets().add(Links.CSS_PATH);
         imageView.setFitHeight(50);
         imageView.setFitWidth(100);
 
@@ -82,7 +82,7 @@ public class newPlayLevel {
     }
 
     public void setCharacter(Stage primaryStage){
-        character = new ImageView(new Image("file:E:/code/TheMazeRunner/src/main/java/image/hold.png"));
+        character = new ImageView(new Image(Links.HOLD_PATH));
         SpriteAnimation animation = new SpriteAnimation(character,
                 Duration.millis(1000), 3, 64, 64);
         animation.setCycleCount(javafx.animation.Animation.INDEFINITE);
@@ -176,7 +176,7 @@ public class newPlayLevel {
 
         /////
 
-        Image presse = new Image("file:E:/code/TheMazeRunner/src/main/java/image/pressE.png");
+        Image presse = new Image(Links.PRESSE_PATH);
         presseView = new ImageView(presse);
         presseView.setVisible(false);
         layout.getChildren().add(presseView);
@@ -193,8 +193,8 @@ public class newPlayLevel {
         for (Button game : games) {
             game.setPrefSize(100, 100);
         }
-        Image gamebutton = new Image("file:E:/code/TheMazeRunner/src/main/java/image/gamebutton.png");
-        Image flag = new Image("file:E:/code/TheMazeRunner/src/main/java/image/flag.png");
+        Image gamebutton = new Image(Links.GAMEBUTTON_PATH);
+        Image flag = new Image(Links.FLAG_PATH);
         ImageView flagView = new ImageView(flag);
         for (Button game : games) {
             ImageView gameView = null;
@@ -255,7 +255,7 @@ public class newPlayLevel {
     public void updateFrame(int... frameIndices) {
         currentFrame = (currentFrame + 1) % frameIndices.length;
         int frameIndex = frameIndices[currentFrame];
-        String filePath = "E:\\code\\TheMazeRunner\\src\\main\\java\\sound\\footstep.wav";
+        String filePath = Links.FOOTSTEP_PATH;
         Media soundFootstep = new Media(new File(filePath).toURI().toString());
         MediaPlayer footstep = new MediaPlayer(soundFootstep);
 
@@ -263,23 +263,23 @@ public class newPlayLevel {
         String imagePath = "";
         switch (frameIndex) {
             case 0: // Di chuyển lên
-                imagePath = "file:E:/code/TheMazeRunner/src/main/java/image/up.png";
+                imagePath = Links.UP_PATH;
                 footstep.play();
                 break;
             case 4: // Di chuyển xuống
-                imagePath = "file:E:/code/TheMazeRunner/src/main/java/image/down.png";
+                imagePath = Links.DOWN_PATH;
                 footstep.play();
                 break;
             case 8: // Di chuyển qua trái
-                imagePath = "file:E:/code/TheMazeRunner/src/main/java/image/left.png";
+                imagePath = Links.LEFT_PATH;
                 footstep.play();
                 break;
             case 12: // Di chuyển qua phải
-                imagePath = "file:E:/code/TheMazeRunner/src/main/java/image/right.png";
+                imagePath = Links.RIGHT_PATH;
                 footstep.play();
                 break;
             case 16:
-                imagePath = "file:E:/code/TheMazeRunner/src/main/java/image/hold.png";
+                imagePath = Links.HOLD_PATH;
                 break;
             default:
                 break;

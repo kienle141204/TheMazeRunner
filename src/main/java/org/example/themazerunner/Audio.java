@@ -13,7 +13,7 @@ public class Audio {
     }
 
     private static void loadClickSound() {
-        String clickSoundFilePath = "E:\\code\\TheMazeRunner\\src\\main\\java\\sound\\clicksound.wav";
+        String clickSoundFilePath = Links.CLICKSOUND_PATH;
         clickSoundMedia = new Media(new File(clickSoundFilePath).toURI().toString());
     }
 

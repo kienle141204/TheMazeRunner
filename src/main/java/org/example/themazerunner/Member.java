@@ -1,6 +1,5 @@
 package org.example.themazerunner;
 
-import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,22 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-
-
 
 public class Member {
     private Scene scene;
 
-
-
     public Member(Stage primaryStage, Scene scene1){
 
         StackPane layout = new StackPane();
-        Image background = new Image("file:E:/code/MyGame/src/main/java/image/member.png");
+        Image background = new Image("file:E:/code/TheMazeRunner/src/main/java/image/member.png");
         ImageView backgroundView = new ImageView(background);
         layout.getChildren().add(backgroundView);
 
@@ -33,11 +24,11 @@ public class Member {
         // Tạo nút Back
         Button backButton = new Button();
         backButton.getStyleClass().add("back-button");
-        Image image = new Image("file:E:/code/MyGame/src/main/java/image/back.png");
+        Image image = new Image("file:E:/code/TheMazeRunner/src/main/java/image/back.png");
         ImageView imageView = new ImageView(image);
         backButton.setGraphic(imageView);
         layout.getChildren().add(backButton);
-        scene.getStylesheets().add("file:///E:/code/MyGame/src/main/java/style.css");
+        scene.getStylesheets().add("file:E:/code/TheMazeRunner/src/main/java/style.css");
         imageView.setFitHeight(75);
         imageView.setFitWidth(150);
 
@@ -50,10 +41,7 @@ public class Member {
         backButton.setOnAction(event -> {
             primaryStage.setScene(scene1);
         });
-
-
     }
-
     public Scene getScene() {
         return scene;
     }

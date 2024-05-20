@@ -4,6 +4,7 @@ module org.example.themazerunner {
     requires javafx.media;
 
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens org.example.themazerunner to javafx.fxml;
     exports org.example.themazerunner;

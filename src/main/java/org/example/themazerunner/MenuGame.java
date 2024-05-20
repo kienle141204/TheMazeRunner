@@ -48,7 +48,7 @@ public class MenuGame extends Application {
     private void setButton(){
         Button button = new Button();
         button.getStyleClass().add("button");//add class css cho button :) tôi nhận ra là tất cả nút khác kế thừa thuộc tính của button
-        Image name = new Image("file:E:/code/TheMazeRunner/src/main/java/image/name2.png");
+        Image name = new Image(Links.GAME_NAME_PATH);
         ImageView nameView = new ImageView(name);
         button.setGraphic(nameView);
         nameView.setFitWidth(500);
@@ -58,7 +58,7 @@ public class MenuGame extends Application {
         Button button1 = new Button();
         button1.getStyleClass().add("play-button");
         // Tải biểu tượng "play" từ tệp hình ảnh
-        Image playIconImage = new Image("file:E:/code/TheMazeRunner/src/main/java/image/play1.png");
+        Image playIconImage = new Image(Links.PLAYBUTTON_PATH);
         ImageView playIconImageView = new ImageView(playIconImage);
         // Đặt biểu tượng "play" làm đồng hành của nút
         button1.setGraphic(playIconImageView);
@@ -67,7 +67,7 @@ public class MenuGame extends Application {
 
         Button button2 = new Button();
         button2.getStyleClass().add("help-button");
-        Image helpIconImage = new Image("file:E:/code/TheMazeRunner/src/main/java/image/help.png");
+        Image helpIconImage = new Image(Links.HELPBUTTON_PATH);
         ImageView helpIconImageView = new ImageView(helpIconImage);
         button2.setGraphic(helpIconImageView);
         helpIconImageView.setFitWidth(150);
@@ -75,7 +75,7 @@ public class MenuGame extends Application {
 
         Button button3 = new Button();
         button3.getStyleClass().add("exit-button");
-        Image exitIconImage = new Image("file:E:/code/TheMazeRunner/src/main/java/image/exit.png");
+        Image exitIconImage = new Image(Links.EXITBUTTON_PATH);
         ImageView exitIconImageView = new ImageView(exitIconImage);
         button3.setGraphic(exitIconImageView);
         exitIconImageView.setFitWidth(150);
@@ -90,8 +90,8 @@ public class MenuGame extends Application {
 
         scene1 = new Scene(layout1, 1000, 750);
 
-        scene1.getStylesheets().add("file:E:/code/TheMazeRunner/src/main/java/style.css");
-        Image image1 = new Image("file:E:/code/TheMazeRunner/src/main/java/image/mazeimage.png");
+        scene1.getStylesheets().add(Links.CSS_PATH);
+        Image image1 = new Image(Links.BACKGROUND_game);
         ImageView backgroundImage = new ImageView(image1);
         layout1.getChildren().add(backgroundImage);
         backgroundImage.fitWidthProperty().bind(primaryStage.widthProperty());// làm như này thì nền mới full cửa sổ được
@@ -138,7 +138,7 @@ public class MenuGame extends Application {
         });
     }
     public void playBackgroundMediaPlayer(){
-        String filePath = "E:/code/TheMazeRunner/src/main/java/sound/soundtrack.mp3";
+        String filePath = Links.SOUNDTRACK_PATH;
         Media sound = new Media(new File(filePath).toURI().toString());
 
         // Tạo một đối tượng MediaPlayer từ Media

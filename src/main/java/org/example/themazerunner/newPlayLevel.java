@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -36,14 +37,20 @@ public class newPlayLevel {
     ImageView presseView;
     private boolean pressed = false;
     private Stage GamePlaystage;
+    private Stage Video;
     private MenuGame menuGame = new MenuGame();
     private Audio audio;
+    private MediaPlayer mediaPlayer;
+    private MediaView mediaView;
 
 
 
     public newPlayLevel(Stage primaryStage, Scene scene1,StackPane layout)  {
         this.layout = layout;
         GamePlaystage = new Stage();
+        Image icon = new Image(Links.MAZEICON);
+
+        primaryStage.getIcons().add(icon);
         Image background = new Image(Links.BGNEWPLAYLV_PATH);
         ImageView backgroundView = new ImageView(background);
         backgroundView.fitWidthProperty().bind(primaryStage.widthProperty());// làm như này thì nền mới full cửa sổ được
@@ -79,7 +86,35 @@ public class newPlayLevel {
             menuGame.start(primaryStage);
             //primaryStage.setScene(scene1);
         });
+        ///////
+
     }
+    public void playVideo() {
+        String videoFile = "path/to/your/video.mp4";
+        Media media = new Media(new File(videoFile).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+
+        mediaView = new MediaView(mediaPlayer);
+        mediaView.setFitWidth(800);
+        mediaView.setFitHeight(600);
+
+        layout.getChildren().add(mediaView);
+
+        // Bắt đầu phát video và hiển thị mediaView
+        mediaPlayer.play();
+        mediaView.setVisible(true);
+
+        // Lắng nghe sự kiện kết thúc của video
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                // Khi kết thúc, ẩn mediaView và dừng video
+                mediaView.setVisible(false);
+                mediaPlayer.stop();
+            }
+        });
+    }
+
 
     public void setCharacter(Stage primaryStage){
         character = new ImageView(new Image(Links.HOLD_PATH));

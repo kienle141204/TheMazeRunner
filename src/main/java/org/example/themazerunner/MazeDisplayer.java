@@ -3,6 +3,7 @@ package org.example.themazerunner;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
@@ -15,6 +16,7 @@ import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -92,14 +94,14 @@ class MazeDisplayer
 	{
 		Image background;
 
-		background = new Image(Links.BACKGROUND_PATH);
+		background = new Image(Links.bgJUNGLEMAZE1);
 		ImageView backgroundImage = new ImageView(background);
 		backgroundImage.setFitWidth(1000);
 		backgroundImage.setFitHeight(750);
 		root.getChildren().add(backgroundImage);
 		for (int i = 0; i < mazeData.length; i++) {
 			for (int j = 0; j < mazeData[i].length; j++) {
-				if (mazeData[i][j] == 0  || mazeData[i][j] == 3)
+				if (mazeData[i][j] == 0  )
 				{
 						Image name;
 						name = new Image(Links.WALL_PATH);
@@ -109,18 +111,6 @@ class MazeDisplayer
 						wall.setX(j*RECT_SIZE);
 						wall.setY(i*RECT_SIZE);
 						root.getChildren().add(wall);
-
-
-				}else if (mazeData[i][j] == 9) {
-						Image name;
-
-						name = new Image(Links.ICE_PATH);;
-						ImageView path = new ImageView(name) ;
-						path.setFitWidth(RECT_SIZE);
-						path.setFitHeight(RECT_SIZE);
-						path.setX(j*RECT_SIZE);
-						path.setY(i*RECT_SIZE);
-						root.getChildren().add(path);
 				}
 			}
 		}
@@ -193,33 +183,39 @@ class MazeDisplayer
 			//footstep.play();
 		}
 		if (check(newX,newY)==-1){
-			showWinMessage("chúc mừng bạn đã vượt qua màn 1 , hãy cố gắng lên nhé");
+			showWinMessage();
 			Stage currentStage = (Stage) root.getScene().getWindow();
 			currentStage.close();
 		}
 		if (check(newX,newY)==-2){
-			showWinMessage("chúc mừng bạn đã vượt qua màn 2 , hãy cố gắng lên nhé");
+			showWinMessage();
 			Stage currentStage = (Stage) root.getScene().getWindow();
 			currentStage.close();
 		}
 		if (check(newX,newY)==-3){
-			showWinMessage("chúc mừng bạn đã vượt qua màn 3 , hãy cố gắng lên nhé");
+			showWinMessage();
 			Stage currentStage = (Stage) root.getScene().getWindow();
 			currentStage.close();
 		}
 		if (check(newX,newY)==-4){
-			showWinMessage("chúc mừng bạn đã vượt qua màn 4 , hãy cố gắng lên nhé");
+			showWinMessage();
 			Stage currentStage = (Stage) root.getScene().getWindow();
 			currentStage.close();
 		}
 		if (check(newX,newY)==-5){
-			showWinMessage("chúc mừng bạn đã vượt qua màn 5 , hãy cố gắng lên nhé");
-			Stage currentStage = (Stage) root.getScene().getWindow();
-			currentStage.close();
+
 		}
 		if(check(newX,newY)==3){
-			characterX = 13*RECT_SIZE;
-			characterY = 5*RECT_SIZE;
+			characterX = 5*RECT_SIZE;
+			characterY = 1*RECT_SIZE;
+			root.getChildren().remove(character);
+			character.setX(characterX);
+			character.setY(characterY);
+			root.getChildren().add(character);
+		}
+		if(check(newX,newY)==4){
+			characterX = 22*RECT_SIZE;
+			characterY = 1*RECT_SIZE;
 			root.getChildren().remove(character);
 			character.setX(characterX);
 			character.setY(characterY);
@@ -251,6 +247,7 @@ class MazeDisplayer
 		else if(mazeData[top][left] == -4 || mazeData[top][right] == -4 || mazeData[bottom][left] == -4 || mazeData[bottom][right] == -4) return -4;// cổng map4
 		else if(mazeData[top][left] == -5 || mazeData[top][right] == -5 || mazeData[bottom][left] == -5 || mazeData[bottom][right] == -5) return -5; // cổng map5
 		else if(mazeData[top1][left1] == 3 || mazeData[top1][right1] == 3 || mazeData[bottom1][left1] == 3 || mazeData[bottom1][right1] == 3) return 3;
+		else if(mazeData[top1][left1] == 4 || mazeData[top1][right1] == 4 || mazeData[bottom1][left1] == 4 || mazeData[bottom1][right1] == 4) return 4;
 		else if(mazeData[top][left] == 1 && mazeData[top][right] == 1 && mazeData[bottom][left] == 1 && mazeData[bottom][right] == 1) return 1; // đường đi
 		return 0;
 
@@ -258,28 +255,28 @@ class MazeDisplayer
 	public void updateFrame(int... frameIndices) {
 		currentFrame = (currentFrame + 1) % frameIndices.length;
 		int frameIndex = frameIndices[currentFrame];
-		String filePath = Links.FOOTSTEP_PATH;
-		Media soundFootstep = new Media(new File(filePath).toURI().toString());
-		MediaPlayer footstep = new MediaPlayer(soundFootstep);
+		//String filePath = Links.FOOTSTEP_PATH;
+		//Media soundFootstep = new Media(new File(filePath).toURI().toString());
+		//MediaPlayer footstep = new MediaPlayer(soundFootstep);
 
 		// Tạo đường dẫn tới tập tin ảnh mới dựa trên hành động
 		String imagePath = "";
 		switch (frameIndex) {
 			case 0: // Di chuyển lên
 				imagePath = Links.UP1_PATH;
-				footstep.play();
+				//footstep.play();
 				break;
 			case 4: // Di chuyển xuống
 				imagePath = Links.DOWN1_PATH;
-				footstep.play();
+				//footstep.play();
 				break;
 			case 8: // Di chuyển qua trái
 				imagePath = Links.LEFT1_PATH;
-				footstep.play();
+				//footstep.play();
 				break;
 			case 12: // Di chuyển qua phải
 				imagePath = Links.RIGHT1_PATH;
-				footstep.play();
+				//footstep.play();
 				break;
 			case 16:
 				imagePath = Links.HOLD1_PATH;
@@ -298,7 +295,7 @@ class MazeDisplayer
 		}
 	}
 
-	public void showWinMessage(String s) {
+	public void showWinMessage() {
 		// Tạo một Stage mới cho cửa sổ thông báo tùy chỉnh
 		Stage alertStage = new Stage();
 		alertStage.initStyle(StageStyle.UNDECORATED);
@@ -309,22 +306,22 @@ class MazeDisplayer
 		titleBar.setAlignment(Pos.CENTER_RIGHT);
 
 		// Tạo nội dung thông báo
-		Label messageLabel = new Label(s);
+		Label messageLabel = new Label();
 		Button okButton = new Button();
 		Image okImage = new Image(Links.OKBUTTON_PATH);
 		ImageView okImageView = new ImageView(okImage);
 		okImageView.setFitWidth(100);  // Điều chỉnh kích thước hình ảnh nếu cần
 		okImageView.setFitHeight(50);
 		okButton.setGraphic(okImageView);
+
+		VBox contentLayout = new VBox(110, messageLabel, okButton);
+		contentLayout.setAlignment(Pos.CENTER);
 		okButton.setStyle("-fx-background-color: transparent; -fx-border-width: 0; -fx-padding: 0;");
 		okButton.setOnAction(e -> alertStage.close());
-
-		VBox contentLayout = new VBox(10, messageLabel, okButton);
-		contentLayout.setAlignment(Pos.CENTER);
 		contentLayout.setPadding(new Insets(20));
 
 		// Tạo hình ảnh nền và thiết lập nền cho ô thông báo
-		Image backgroundImage = new Image(Links.BACKGROUND_PATH);
+		Image backgroundImage = new Image(Links.CONGRAT);
 		BackgroundImage backgroundImg = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(1.0, 1.0, true, true, false, false));
 		Background background = new Background(backgroundImg);
 		contentLayout.setBackground(background);
@@ -334,9 +331,17 @@ class MazeDisplayer
 		root.setTop(titleBar);
 		root.setCenter(contentLayout);
 
-		Scene scene = new Scene(root, 200, 150);
+		Scene scene = new Scene(root, 400, 200);
 		alertStage.setScene(scene);
+
+		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+		alertStage.setX((screenBounds.getWidth() - 300) / 2);  // Căn giữa theo chiều ngang
+		alertStage.setY((screenBounds.getHeight() - 200) / 2);
+
 		alertStage.showAndWait();
+	}
+	public void showWinAll(){
+
 	}
 
 	public Scene getSceneMaze1(int x, int y) {
@@ -404,5 +409,4 @@ class MazeDisplayer
 		}));
 		return scene ;
 	}
-
 }

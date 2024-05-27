@@ -30,7 +30,6 @@ public class SpriteAnimation extends Transition {
         int colIndex = index % frameCount;
         int x = colIndex * width + offsetX;
         imageView.setViewport(new javafx.geometry.Rectangle2D(x, 0, width, height));
-
     }
 }
 

@@ -1,6 +1,5 @@
 package org.example.themazerunner;
 
-
 import javafx.util.Duration;
 import javafx.animation.Animation;
 import javafx.animation.Interpolatable;

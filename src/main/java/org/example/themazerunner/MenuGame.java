@@ -4,6 +4,7 @@ import javafx.application.Application; // thư viện bắt buộc phải có
 import javafx.application.Platform;
 import javafx.geometry.Pos; // để điều chỉnh các box theo tọa độ
 import javafx.scene.layout.StackPane; //tạo stackpane , giúp căn chỉnh nút (một phần nhỏ)
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button; // tạo nút và điều khiển nút
@@ -34,6 +35,9 @@ public class MenuGame extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        Image icon = new Image(Links.MAZEICON);
+
+        primaryStage.getIcons().add(icon);
 
         primaryStage.setTitle("Menu Game");
         // button chứa tên game , ấn vào hiện ra thông tin về nhóm
@@ -128,14 +132,41 @@ public class MenuGame extends Application {
         });
 
         button1.setOnAction(event -> {
-            audio.playClickSound();
+            // Tạo một Stage mới cho video
+            Stage videoStage = new Stage();
+
+            // Phát video
+            Media videoMedia = new Media(new File(Links.VIDEO_PATH).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(videoMedia);
+            MediaView mediaView = new MediaView(mediaPlayer);
+
+            // Khi video kết thúc, đóng Stage chứa video và hiển thị lại primaryStage
+            mediaPlayer.setOnEndOfMedia(() -> {
+                primaryStage.show();
+                videoStage.close();
+                StackPane layout = new StackPane();
+                newPlayLevel playLevel = new newPlayLevel(primaryStage, scene1,layout);
+                playLevel.setPlayGameButton();
+                playLevel.setCharacter(primaryStage);
+                primaryStage.setScene(playLevel.getScene());
+            });
+
+            // Thêm MediaView vào Scene và hiển thị Stage chứa video
+            StackPane videoLayout = new StackPane(mediaView);
+            Scene videoScene = new Scene(videoLayout, 1000, 750);
+            videoStage.setScene(videoScene);
+            videoStage.show();
+            mediaPlayer.play();
+            primaryStage.hide();
+
+            // Tắt tất cả các phương tiện truyền thông khác nếu có
             stopAllMediaPlayers();
-            StackPane layout = new StackPane();
-            newPlayLevel playLevel = new newPlayLevel(primaryStage, scene1,layout);
-            playLevel.setPlayGameButton();
-            playLevel.setCharacter(primaryStage);
-            primaryStage.setScene(playLevel.getScene());
+
+             //Chơi âm thanh khi ấn nút
+            audio.playVideo();
+            audio.playClickSound();
         });
+
     }
     public void playBackgroundMediaPlayer(){
         String filePath = Links.SOUNDTRACK_PATH;

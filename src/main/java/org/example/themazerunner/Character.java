@@ -1,44 +1,50 @@
 package org.example.themazerunner;
 
-
+import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.effect.DropShadow;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import javafx.scene.shape.Rectangle;
 
 public class Character extends Pane {
-    ImageView imageView;  
-    private double x ; // Tọa độ x của nhân vật
-    private double y ; // Tọa độ y của nhân vật
+    ImageView imageView;
+    private double x; // Tọa độ x của nhân vật
+    private double y; // Tọa độ y của nhân vật
     int count = 3;
     int columns = 3;
     int offsetX = 0;
-    int offsetY = 64;
-    int width = 64;
-    int height = 64;
-
+    int offsetY = 0;
+    int width = 32;
+    int height = 32;
+    private Rectangle visionBox;
+    private static final double VISION_WIDTH = 50; // Width of the vision box
+    private static final double VISION_HEIGHT = 50;
     MazeDrawer mazeDrawer; // Thêm biến tham chiếu đến MazeDrawer
-
+    private Rectangle hitbox;
     SpriteAnimation1 animation;
 
     public Character(ImageView imageView, MazeDrawer mazeDrawer) {
+        this.mazeDrawer = mazeDrawer; // Set the mazeDrawer
         this.imageView = imageView;
         this.imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
         animation = new SpriteAnimation1(imageView, Duration.millis(200), count, columns, offsetX, offsetY, width, height);
         getChildren().addAll(imageView);
-        this.x = 32; // Khởi tạo tọa độ x
-        this.y = 32; // Khởi tạo tọa độ y
-        this.mazeDrawer = mazeDrawer; // Set the mazeDrawer
-        DropShadow dropShadow = new DropShadow();
-        dropShadow.setColor(Color.rgb(255,0,0,0)); // Màu sắc của ánh sáng
-        dropShadow.setRadius(650);// Bán kính của ánh sáng
-        dropShadow.setSpread(0.95);
-        // Áp dụng hiệu ứng ánh sáng cho nhân vật
-        imageView.setEffect(dropShadow);
-    }   
+        hitbox = new Rectangle(this.x,this.y,25,25);
+        updateHitbox();
+        this.x = 64; // Khởi tạo tọa độ x
+        this.y = 64; // Khởi tạo tọa độ y
+        setTranslateX(this.x);
+        setTranslateY(this.y);
+        // Initialize the vision box
+        visionBox = new Rectangle (VISION_WIDTH, VISION_HEIGHT);
+        updateVisionBox();
+
+    }
+
 
     // Phương thức getter cho tọa độ x
     public double getX() {
@@ -60,73 +66,67 @@ public class Character extends Pane {
         this.y = y;
     }
 
-    public void moveX(int x) {
-        boolean right = x > 0 ? true : false;
-        for(int i = 0; i < Math.abs(x); i++) {
-            if(right) {
-                this.setTranslateX(this.getTranslateX() + 1);
-                setX(getTranslateX());
-            }
-                
-            else {
-                this.setTranslateX(this.getTranslateX() - 1);
-                setX(getTranslateX());
-            }
-              
+
+    public void moveX(int dx) {
+        double newX = this.x + dx;
+        if (willCollideWithWall(newX, this.y, hitbox.getWidth(), hitbox.getHeight())==1) {
+            this.x = newX;
+            setTranslateX(this.x);
+            updateHitbox() ;
+            updateVisionBox();
+            //hitbox.setX(this.x);
         }
     }
 
-    public void moveY(int y) {
-        boolean down = y > 0 ? true : false;
-        for(int i = 0; i < Math.abs(y); i++) {
-            if(down){
-                this.setTranslateY(this.getTranslateY() + 1);
-                setY(getTranslateY());
-            } 
-                
-            else {
-                this.setTranslateY(this.getTranslateY() -1);
-                setY(getTranslateY());
+    public void moveY(int dy) {
+        double newY = this.y + dy;
+        if (willCollideWithWall(this.x, newY, hitbox.getWidth(), hitbox.getHeight())==1) {
+            this.y = newY;
+            setTranslateY(this.y);
+            updateHitbox() ;
+            updateVisionBox();
+            //hitbox.setY(this.y);
+        }
+    }
+    public void updateHitbox() {
+        double centerX = getTranslateX() + width / 2;
+        double centerY = getTranslateY() + height / 2;
+        hitbox.setX(centerX - (25) / 2);
+        hitbox.setY(centerY - (25) / 2);
+    }
 
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+
+    public void updateVisionBox() {
+        double centerX = getTranslateX() + width / 2;
+        double centerY = getTranslateY() + height / 2;
+        visionBox.setX(centerX - VISION_WIDTH / 2);
+        visionBox.setY(centerY - VISION_HEIGHT / 2);
+    }
+
+    public Rectangle getVisionBox() {
+        return visionBox;
+    }
+
+    protected int willCollideWithWall(double x, double y, double width, double height) {
+        // Giảm kích thước của hitbox nhân vật và dịch chuyển vị trí
+        double smallerWidth = width * 0.8; // Giảm chiều rộng của hitbox nhân vật
+        double smallerHeight = height * 0.8; // Giảm chiều cao của hitbox nhân vật
+        double xOffset = (width - smallerWidth) / 2; // Dịch chuyển hitbox theo trục X
+        double yOffset = (height - smallerHeight) / 2 ; // Dịch chuyển hitbox theo trục Y
+
+        // Tạo hình chữ nhật đại diện cho vị trí mới và kích thước mới của nhân vật
+        Rectangle futureCharacter = new Rectangle(x + xOffset, y + yOffset, smallerWidth, smallerHeight);
+
+        // Kiểm tra va chạm với từng tường
+        for (Block wall : Main2.walls) {
+            if (futureCharacter.getBoundsInParent().intersects(wall.getwall().getBoundsInParent())) {
+                return 0; // Nếu có va chạm, ngăn nhân vật di chuyển
             }
-                
         }
+        return 1; // Nếu không có va chạm, cho phép nhân vật di chuyển
     }
 
-    public Boolean isWallCollision(double x, double y) {
-        // Kiểm tra xem nhân vật có chạm vào tường không
-        int[][] mazeData = mazeDrawer.getMazeData();
-        double cellSizeWidth = mazeDrawer.getCellSizeWidth();
-        double cellSizeHeight = mazeDrawer.getCellSizeHeight();
-    
-        // Làm tròn tọa độ x và y đến số nguyên lớn nhất
-        int column = ((int) Math.floor((x) / cellSizeWidth));
-        int row = ((int) Math.floor((y )/ cellSizeHeight));
-
-        return mazeData[row][column] == 0;
-        /*//int column1 = ((int) Math.ceil((x) / cellSizeWidth));
-        //int row1 = ((int) Math.ceil((y )/ cellSizeHeight));
-    
-        // Kiểm tra xem ô mê cung có là tường không
-        return mazeData[row][column] == 0 ;*/
-        /*int top = (int) ((y)/ 32);
-        int left = (int) (x/32);
-        int bottom = (int) (((y-5)+ 32) / 32);
-        int right = (int) (((x-5) + 32) / 32);
-
-        // Kiểm tra giới hạn mảng
-        if (top < 0 || top >= mazeData.length || left < 0 || left >= mazeData[0].length ||
-                bottom < 0 || bottom >= mazeData.length || right < 0 || right >= mazeData[0].length) {
-            return 0;
-        }
-
-        if(mazeData[top][left] == 1 && mazeData[top][right] == 1 && mazeData[bottom][left] == 1 && mazeData[bottom][right] == 1) return 1; // đường đi
-        if(mazeData[top][left] == -1 || mazeData[top][right] == -1 || mazeData[bottom][left] == -1 || mazeData[bottom][right] == -1) return -1;// cổng map1
-        if(mazeData[top][left] == -2 || mazeData[top][right] == -2 || mazeData[bottom][left] == -2 || mazeData[bottom][right] == -2) return -2;// cổng map2
-        if(mazeData[top][left] == -3 || mazeData[top][right] == -3 || mazeData[bottom][left] == -3 || mazeData[bottom][right] == -3) return -3;// cổng map3
-        if(mazeData[top][left] == -4 || mazeData[top][right] == -4 || mazeData[bottom][left] == -4 || mazeData[bottom][right] == -4) return -4;// cổng map4
-        if(mazeData[top][left] == -5 || mazeData[top][right] == -5 || mazeData[bottom][left] == -5 || mazeData[bottom][right] == -5) return -5; // cổng map5
-        if(mazeData[bottom][left]==3) return 3;
-        return 0;*/
-    }
 }

@@ -19,7 +19,7 @@ public class HelpScene {
         StackPane layout = new StackPane();
 
         // Load hình ảnh background và hiển thị nó trong ImageView
-        Image background = new Image("file:E:/code/TheMazeRunner/src/main/java/image/helpscene4.png");
+        Image background = new Image(Links.HELP);
         ImageView backgroundView = new ImageView(background);
         layout.getChildren().add(backgroundView);
 
@@ -30,7 +30,7 @@ public class HelpScene {
         // Tạo nút Back và thêm vào layout
         Button backButton = new Button();
         backButton.getStyleClass().add("back-button");
-        Image backImage = new Image("file:E:/code/TheMazeRunner/src/main/java/image/back.png");
+        Image backImage = new Image(Links.BACKBUTTON_PATH);
         ImageView backImageView = new ImageView(backImage);
         backButton.setGraphic(backImageView);
         layout.getChildren().add(backButton);

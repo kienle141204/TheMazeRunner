@@ -1,4 +1,4 @@
-package org.example.themazerunner;
+package org.example.themazerunner.Maze;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -29,6 +29,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+
+import org.example.themazerunner.UI.Audio;
+
+
 
 public class Main2 extends Application {
     private Map<KeyCode, Boolean> keys = new HashMap<>();

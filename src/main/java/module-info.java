@@ -7,5 +7,5 @@ module org.example.themazerunner {
     requires java.desktop;
 
     opens org.example.themazerunner to javafx.fxml;
-    exports org.example.themazerunner;
+    exports org.example.themazerunner.UI to javafx.graphics;
 }

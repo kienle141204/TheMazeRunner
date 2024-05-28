@@ -1,4 +1,5 @@
-package org.example.themazerunner;
+package org.example.themazerunner.UI;
+
 
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -7,6 +8,9 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import org.example.themazerunner.Maze.Links;
+import org.example.themazerunner.Maze.MazeDisplayer;
+
 
 public class Game1 extends Application
 {

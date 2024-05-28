@@ -1,4 +1,5 @@
-package org.example.themazerunner;
+package org.example.themazerunner.Maze;
+
 
 public class Links {
     // hinh anh

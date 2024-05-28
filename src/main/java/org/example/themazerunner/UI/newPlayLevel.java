@@ -1,4 +1,5 @@
-package org.example.themazerunner;
+package org.example.themazerunner.UI;
+
 
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
@@ -18,6 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
+import org.example.themazerunner.Maze.Links;
+import org.example.themazerunner.Maze.SpriteAnimation;
 
 import java.io.File;
 import java.util.Locale;

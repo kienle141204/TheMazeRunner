@@ -1,4 +1,5 @@
-package org.example.themazerunner;
+package org.example.themazerunner.UI;
+
 
 import javafx.application.Application; // thư viện bắt buộc phải có
 import javafx.application.Platform;
@@ -17,6 +18,7 @@ import javafx.util.Duration; // điều khiển các hoạt động liên quan �
 import javafx.geometry.Insets; // chỉnh css ,lề , linh tinh
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import org.example.themazerunner.Maze.Links;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,8 +42,6 @@ public class MenuGame extends Application {
         primaryStage.getIcons().add(icon);
 
         primaryStage.setTitle("Menu Game");
-        // button chứa tên game , ấn vào hiện ra thông tin về nhóm
-        // theem nhac nen
         playBackgroundMediaPlayer();
         setButton();
 
@@ -51,7 +51,7 @@ public class MenuGame extends Application {
     }
     private void setButton(){
         Button button = new Button();
-        button.getStyleClass().add("button");//add class css cho button :) tôi nhận ra là tất cả nút khác kế thừa thuộc tính của button
+        button.getStyleClass().add("button");
         Image name = new Image(Links.GAME_NAME_PATH);
         ImageView nameView = new ImageView(name);
         button.setGraphic(nameView);

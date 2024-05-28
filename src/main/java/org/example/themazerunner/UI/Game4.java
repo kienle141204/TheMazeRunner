@@ -1,13 +1,17 @@
-package org.example.themazerunner;
+package org.example.themazerunner.UI;
+
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.example.themazerunner.Maze.Data;
+import org.example.themazerunner.Maze.Links;
+import org.example.themazerunner.Maze.Main2;
 
 public class Game4 extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Main2 mainGame = new Main2(Data.mazeData1,Links.G3);
+            Main2 mainGame = new Main2(Data.mazeData1, Links.G3);
             mainGame.start(primaryStage);
         } catch (Exception e) {
             e.printStackTrace();

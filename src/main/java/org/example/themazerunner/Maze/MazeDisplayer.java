@@ -1,4 +1,4 @@
-package org.example.themazerunner;
+package org.example.themazerunner.Maze;
 
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
@@ -24,7 +24,7 @@ import javafx.scene.Node;
 import javafx.animation.KeyFrame;
 
 
-class MazeDisplayer
+public class MazeDisplayer
 {
 	public static  int NUM_OF_FRAMES = 3;
 	private static final int WIDTH = 1000;

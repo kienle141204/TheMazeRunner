@@ -1,4 +1,4 @@
-package org.example.themazerunner;
+package org.example.themazerunner.Maze;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;

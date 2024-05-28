@@ -1,4 +1,4 @@
-package org.example.themazerunner;
+package org.example.themazerunner.Maze;
 
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;

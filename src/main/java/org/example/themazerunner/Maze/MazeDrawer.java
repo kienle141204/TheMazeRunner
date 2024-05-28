@@ -1,4 +1,4 @@
-package org.example.themazerunner;
+package org.example.themazerunner.Maze;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -58,14 +58,7 @@ public class MazeDrawer {
                 if (i >= startRow && i <= endRow && j >= startColumn && j <= endColumn) {
                     if (mazeData[i][j] == 0) {
                         gc.drawImage(wallImage, j * cellSizeWidth, i * cellSizeHeight, cellSizeWidth, cellSizeHeight);
-                    }/*else if(mazeData[i][j] == 3){
-                        imageView = new ImageView(tele);
-                        imageView.setFitHeight(cellSizeHeight);
-                        imageView.setFitWidth(cellSizeWidth);
-                        Main2.gamePane.getChildren().add(imageView);
-                        imageView.setTranslateX(j*cellSizeWidth);
-                        imageView.setTranslateY(i*cellSizeHeight);
-                    }*/
+                    }
                     else {
                         if ((i == startRow && j >= startColumn && j <= endColumn) ||
                                 (i == endRow && j >= startColumn && j <= endColumn) ||

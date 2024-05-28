@@ -1,4 +1,5 @@
-package org.example.themazerunner;
+package org.example.themazerunner.UI;
+
 
 import javafx.animation.ScaleTransition;
 import javafx.scene.control.Button;

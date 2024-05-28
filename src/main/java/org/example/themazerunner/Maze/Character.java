@@ -1,4 +1,4 @@
-package org.example.themazerunner;
+package org.example.themazerunner.Maze;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;

@@ -1,9 +1,10 @@
-package org.example.themazerunner;
+package org.example.themazerunner.UI;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import org.example.themazerunner.Maze.Links;
 
 public class Audio {
     private static Media clickSoundMedia;

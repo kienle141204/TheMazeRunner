@@ -6,25 +6,17 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
-import java.io.File;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import javafx.scene.Node;
 import javafx.animation.KeyFrame;
 
 import org.example.themazerunner.UI.Audio;
-
 
 public class MazeDisplayer
 {
@@ -78,21 +70,6 @@ public class MazeDisplayer
 		character.setY(characterY);
 		root.getChildren().add(character);
 	}
-	private void lightCharacter(){ // hàm tạo ánh sáng bao quanh nhân vật
-		DropShadow dropShadow = new DropShadow();
-		dropShadow.setColor(Color.rgb(255,255,255,0.4)); // Màu sắc của ánh sáng
-		dropShadow.setRadius(500);// Bán kính của ánh sáng
-		dropShadow.setSpread(0.95);
-		// Áp dụng hiệu ứng ánh sáng cho nhân vật
-		character.setEffect(dropShadow);
-	}
-	private void lightGate(){  // hàm tạo ánh sáng xung quanh cổng
-		DropShadow dropShadow = new DropShadow();
-		dropShadow.setColor(Color.rgb(255,255,255,0.4)); // Màu sắc của ánh sáng
-		dropShadow.setRadius(500);// Bán kính của ánh sáng
-		dropShadow.setSpread(0.95);
-		gate.setEffect(dropShadow);
-	}
 
 	private void drawMaze()
 	{
@@ -107,14 +84,14 @@ public class MazeDisplayer
 			for (int j = 0; j < mazeData[i].length; j++) {
 				if (mazeData[i][j] == 0  )
 				{
-						Image name;
-						name = new Image(Links.WALL_PATH);
-						ImageView wall = new ImageView(name) ;
-						wall.setFitWidth(RECT_SIZE);
-						wall.setFitHeight(RECT_SIZE);
-						wall.setX(j*RECT_SIZE);
-						wall.setY(i*RECT_SIZE);
-						root.getChildren().add(wall);
+					Image name;
+					name = new Image(Links.WALL_PATH);
+					ImageView wall = new ImageView(name) ;
+					wall.setFitWidth(RECT_SIZE);
+					wall.setFitHeight(RECT_SIZE);
+					wall.setX(j*RECT_SIZE);
+					wall.setY(i*RECT_SIZE);
+					root.getChildren().add(wall);
 				}
 			}
 		}
@@ -124,16 +101,13 @@ public class MazeDisplayer
 			for (int j = 0; j < mazeData[i].length; j++) {
 				if (mazeData[i][j] < 0) {
 					Image name;
-
-						name = new Image(Links.GATE_PATH);
-						gate = new ImageView(name);
-						gate.setFitWidth(RECT_SIZE);
-						gate.setFitHeight(RECT_SIZE);
-						gate.setX(j * RECT_SIZE);
-						gate.setY(i * RECT_SIZE);
-
-						root.getChildren().add(gate);
-
+					name = new Image(Links.GATE_PATH);
+					gate = new ImageView(name);
+					gate.setFitWidth(RECT_SIZE);
+					gate.setFitHeight(RECT_SIZE);
+					gate.setX(j * RECT_SIZE);
+					gate.setY(i * RECT_SIZE);
+					root.getChildren().add(gate);
 				}
 			}
 		}
@@ -161,16 +135,7 @@ public class MazeDisplayer
 		}
 
 	}
-	private void darkMap(Pane root){ // hiệu ứng tối cho map
-		ColorAdjust colorAdjust = new ColorAdjust();
-		colorAdjust.setBrightness(-0.95);// độ đen của map
-		for(Node node : root.getChildren()){
-			if(node instanceof ImageView){
-				ImageView imageView = (ImageView) node;
-				imageView.setEffect(colorAdjust);
-			}
-		}
-	}
+
 
 	private void moveCharacter(double dx, double dy) {
 		double newX = characterX + dx;

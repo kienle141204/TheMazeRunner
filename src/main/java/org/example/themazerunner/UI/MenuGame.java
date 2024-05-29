@@ -176,7 +176,6 @@ public class MenuGame extends Application {
         mediaPlayers.add(mediaPlayer);
         // Sự kiện khi âm thanh kết thúc
         mediaPlayer.setOnEndOfMedia(() -> {
-            // Đặt thời gian của mediaPlayer về thời điểm bắt đầu của âm thanh
             mediaPlayer.seek(mediaPlayer.getStartTime());
             // Phát lại âm thanh
             mediaPlayer.play();

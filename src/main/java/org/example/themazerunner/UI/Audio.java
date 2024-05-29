@@ -53,10 +53,12 @@ public class Audio {
             videoMediaPlayer.play();
         }
     }
+
     private static  void loadSoundTrack(){
         String soundTrackPath = Links.SOUNDTRACK_PATH;
         soundTrack = new Media(new File(soundTrackPath).toURI().toString());
     }
+
     public static void playSoundTrack(){
         if ( soundTrack!= null) {
             MediaPlayer soundTrackMedia = new MediaPlayer(soundTrack);

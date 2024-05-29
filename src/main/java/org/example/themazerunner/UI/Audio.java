@@ -9,11 +9,14 @@ import org.example.themazerunner.Maze.Links;
 public class Audio {
     private static Media clickSoundMedia;
     private static Media videoMedia;// Thêm đối tượng Media cho video
+    private static Media soundTrack;
     private static Media footStep;
 
     static {
         loadClickSound();
-        loadVideo(); // Gọi phương thức tải video khi tải lớp Audio
+        loadVideo();
+        loadSoundTrack();
+        // Gọi phương thức tải video khi tải lớp Audio
     }
     public static void playFootStep(){
         String fs = Links.FOOTSTEP_PATH;
@@ -48,6 +51,23 @@ public class Audio {
         if (videoMedia != null) {
             MediaPlayer videoMediaPlayer = new MediaPlayer(videoMedia);
             videoMediaPlayer.play();
+        }
+    }
+    private static  void loadSoundTrack(){
+        String soundTrackPath = Links.SOUNDTRACK_PATH;
+        soundTrack = new Media(new File(soundTrackPath).toURI().toString());
+    }
+    public static void playSoundTrack(){
+        if ( soundTrack!= null) {
+            MediaPlayer soundTrackMedia = new MediaPlayer(soundTrack);
+            soundTrackMedia.play();
+            soundTrackMedia.setOnEndOfMedia(() -> {
+                // Đặt thời gian của mediaPlayer về thời điểm bắt đầu của âm thanh
+                soundTrackMedia.seek(soundTrackMedia.getStartTime());
+                // Phát lại âm thanh
+                soundTrackMedia.play();
+            });
+
         }
     }
 }

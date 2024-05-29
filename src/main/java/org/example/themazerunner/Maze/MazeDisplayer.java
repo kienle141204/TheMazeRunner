@@ -23,6 +23,8 @@ import javafx.util.Duration;
 import javafx.scene.Node;
 import javafx.animation.KeyFrame;
 
+import org.example.themazerunner.UI.Audio;
+
 
 public class MazeDisplayer
 {
@@ -38,6 +40,8 @@ public class MazeDisplayer
 	private int [][] mazeData ;
 	private int currentFrame = 0;
 	private Timeline timeline ;
+
+	private Audio audio;
 
 
 	public Pane getRoot() {
@@ -340,11 +344,11 @@ public class MazeDisplayer
 
 		alertStage.showAndWait();
 	}
-	public void showWinAll(){
 
-	}
 
-	public Scene getSceneMaze1(int x, int y) {
+	public Scene getSceneMaze1(int x, int y)
+	{
+		audio.playSoundTrack();
 		drawMaze() ;
 		drawGate();
 		drawCharacter() ;
@@ -357,6 +361,7 @@ public class MazeDisplayer
 	}
 	public Scene getSceneMaze2(int x, int y)  // x, y = toa do cua Scene
 	{
+		audio.playSoundTrack();
 		drawMaze() ;
 		drawGate();
 		drawCharacter() ;
@@ -369,39 +374,10 @@ public class MazeDisplayer
 	}
 	public Scene getSceneMaze3(int x, int y) // x, y = toa do cua Scene
 	{
+		audio.playSoundTrack();
 		drawMaze() ;
 		drawGate();
 		drawCharacter() ;
-		Scene scene = new Scene(root, x, y);
-		scene.setOnKeyPressed(e -> handleKeyPress(e.getCode(),5));
-		timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-			updateFrame(16);
-		}));
-		return scene ;
-	}
-	public Scene getSceneMaze4(int x, int y) // x, y = toa do cua Scene
-	{
-		drawMaze() ;
-		drawGate();
-		darkMap(root);
-		drawCharacter() ;
-		lightCharacter();
-		lightGate();
-		Scene scene = new Scene(root, x, y);
-		scene.setOnKeyPressed(e -> handleKeyPress(e.getCode(),5));
-		timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
-			updateFrame(16);
-		}));
-		return scene ;
-	}
-	public Scene getSceneMaze5(int x, int y) // x, y = toa do cua Scene
-	{
-		drawMaze() ;
-		drawGate();
-		darkMap(root);
-		drawCharacter() ;
-		lightCharacter();
-		lightGate();
 		Scene scene = new Scene(root, x, y);
 		scene.setOnKeyPressed(e -> handleKeyPress(e.getCode(),5));
 		timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {

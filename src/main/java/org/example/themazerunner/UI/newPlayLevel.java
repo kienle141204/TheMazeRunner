@@ -92,31 +92,7 @@ public class newPlayLevel {
         ///////
 
     }
-    public void playVideo() {
-        String videoFile = "path/to/your/video.mp4";
-        Media media = new Media(new File(videoFile).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
 
-        mediaView = new MediaView(mediaPlayer);
-        mediaView.setFitWidth(800);
-        mediaView.setFitHeight(600);
-
-        layout.getChildren().add(mediaView);
-
-        // Bắt đầu phát video và hiển thị mediaView
-        mediaPlayer.play();
-        mediaView.setVisible(true);
-
-        // Lắng nghe sự kiện kết thúc của video
-        mediaPlayer.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                // Khi kết thúc, ẩn mediaView và dừng video
-                mediaView.setVisible(false);
-                mediaPlayer.stop();
-            }
-        });
-    }
 
 
     public void setCharacter(Stage primaryStage){

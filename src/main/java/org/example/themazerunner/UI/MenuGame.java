@@ -38,7 +38,6 @@ public class MenuGame extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         Image icon = new Image(Links.MAZEICON);
-
         primaryStage.getIcons().add(icon);
 
         primaryStage.setTitle("Menu Game");
@@ -64,7 +63,7 @@ public class MenuGame extends Application {
         // Tải biểu tượng "play" từ tệp hình ảnh
         Image playIconImage = new Image(Links.PLAYBUTTON_PATH);
         ImageView playIconImageView = new ImageView(playIconImage);
-        // Đặt biểu tượng "play" làm đồng hành của nút
+        // Đặt biểu tượng "play"  của nút
         button1.setGraphic(playIconImageView);
         playIconImageView.setFitWidth(150); // Đặt chiều rộng tối đa
         playIconImageView.setFitHeight(75); // Đặt chiều cao tối đa
@@ -131,7 +130,7 @@ public class MenuGame extends Application {
             primaryStage.setScene(member.getScene());
         });
 
-        button1.setOnAction(event -> {
+        button1.setOnAction(event -> {//button "play"
             // Tạo một Stage mới cho video
             Stage videoStage = new Stage();
 

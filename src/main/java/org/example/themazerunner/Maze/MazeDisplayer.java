@@ -224,28 +224,21 @@ public class MazeDisplayer
 	public void updateFrame(int... frameIndices) {
 		currentFrame = (currentFrame + 1) % frameIndices.length;
 		int frameIndex = frameIndices[currentFrame];
-		//String filePath = Links.FOOTSTEP_PATH;
-		//Media soundFootstep = new Media(new File(filePath).toURI().toString());
-		//MediaPlayer footstep = new MediaPlayer(soundFootstep);
 
 		// Tạo đường dẫn tới tập tin ảnh mới dựa trên hành động
 		String imagePath = "";
 		switch (frameIndex) {
 			case 0: // Di chuyển lên
 				imagePath = Links.UP1_PATH;
-				//footstep.play();
 				break;
 			case 4: // Di chuyển xuống
 				imagePath = Links.DOWN1_PATH;
-				//footstep.play();
 				break;
 			case 8: // Di chuyển qua trái
 				imagePath = Links.LEFT1_PATH;
-				//footstep.play();
 				break;
 			case 12: // Di chuyển qua phải
 				imagePath = Links.RIGHT1_PATH;
-				//footstep.play();
 				break;
 			case 16:
 				imagePath = Links.HOLD1_PATH;

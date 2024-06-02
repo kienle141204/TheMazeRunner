@@ -2,20 +2,16 @@ package org.example.themazerunner.UI;
 
 
 import javafx.animation.KeyFrame;
-import javafx.animation.ScaleTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.Timeline;
@@ -23,7 +19,6 @@ import org.example.themazerunner.Maze.Links;
 import org.example.themazerunner.Maze.SpriteAnimation;
 
 import java.io.File;
-import java.util.Locale;
 
 public class newPlayLevel {
     private Scene sceneNewPlatlevel;
@@ -38,13 +33,9 @@ public class newPlayLevel {
     private Timeline timeline;
     private StackPane layout = new StackPane();
     ImageView presseView;
-    private boolean pressed = false;
     private Stage GamePlaystage;
-    private Stage Video;
     private MenuGame menuGame = new MenuGame();
     private Audio audio;
-    private MediaPlayer mediaPlayer;
-    private MediaView mediaView;
 
 
 
@@ -77,17 +68,12 @@ public class newPlayLevel {
 
         StackPane.setAlignment(backButton, Pos.TOP_LEFT);
         StackPane.setMargin(backButton, new Insets(0, 32, 30, 0));
-        /////////////////////////////
-        //MenuGame menuGame = new MenuGame();
-        //menuGame.pauseMediaPlayer();
-        // Hiệu ứng cho nút Back
         ButtonScaleEffect.addScaleEffect(backButton);
 
         backButton.setOnAction(event -> {
             audio.playClickSound();
             menuGame.playBackgroundMediaPlayer();
             menuGame.start(primaryStage);
-            //primaryStage.setScene(scene1);
         });
         ///////
 
@@ -187,8 +173,6 @@ public class newPlayLevel {
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-
-        /////
 
         Image presse = new Image(Links.PRESSE_PATH);
         presseView = new ImageView(presse);

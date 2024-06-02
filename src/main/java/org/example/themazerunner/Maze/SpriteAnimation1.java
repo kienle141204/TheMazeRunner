@@ -2,11 +2,9 @@ package org.example.themazerunner.Maze;
 
 import javafx.util.Duration;
 import javafx.animation.Animation;
-import javafx.animation.Interpolatable;
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class SpriteAnimation1 extends Transition {

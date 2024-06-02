@@ -3,18 +3,14 @@ package org.example.themazerunner.UI;
 
 import javafx.application.Application; // thư viện bắt buộc phải có
 import javafx.application.Platform;
-import javafx.geometry.Pos; // để điều chỉnh các box theo tọa độ
 import javafx.scene.layout.StackPane; //tạo stackpane , giúp căn chỉnh nút (một phần nhỏ)
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button; // tạo nút và điều khiển nút
-import javafx.scene.layout.HBox; // box ngang
 import javafx.scene.layout.VBox;//box dọc
 import javafx.scene.image.Image;// quản lý ảnh , nhưng không hiển thị ra giao diện người dùng
 import javafx.scene.image.ImageView; // đưa ảnh ra giao diện người dùng
-import javafx.animation.ScaleTransition; // hiệu ứng khi trỏ vào nút
-import javafx.util.Duration; // điều khiển các hoạt động liên quan đến thời gian
 import javafx.geometry.Insets; // chỉnh css ,lề , linh tinh
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -25,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-// Kiên : máy tôi chẳng hiểu sao không chạy được liên kết file theo đường dẫn tương đối
-// ae pull về thì đổi lại đường dẫn của các file rồi chạy nhé
 
 public class MenuGame extends Application {
     public Stage primaryStage;

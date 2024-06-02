@@ -1,7 +1,6 @@
 package org.example.themazerunner.Maze;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 

@@ -11,11 +11,12 @@ import org.example.themazerunner.UI.Audio;
 
 public class Game5 extends Application {
     private Audio audio;
+    private Main2 mainGame;
     @Override
     public void start(Stage primaryStage) {
         try {
             audio.playSoundTrack();
-            Main2 mainGame = new Main2(Data.mazeData2, Links.G4);
+            mainGame = new Main2(Data.mazeData5, Links.G4);
             mainGame.start(primaryStage);
         } catch (Exception e) {
             e.printStackTrace();

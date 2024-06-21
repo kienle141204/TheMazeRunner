@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 public class Member {
     private Scene scene;
+    private Audio audio;
 
     public Member(Stage primaryStage, Scene scene1){
 
@@ -40,6 +41,7 @@ public class Member {
         ButtonScaleEffect.addScaleEffect(backButton);
 
         backButton.setOnAction(event -> {
+            audio.playClickSound();
             primaryStage.setScene(scene1);
         });
     }

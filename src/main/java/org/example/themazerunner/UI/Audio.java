@@ -10,22 +10,12 @@ public class Audio {
     private static Media clickSoundMedia;
     private static Media videoMedia;// Thêm đối tượng Media cho video
     private static Media soundTrack;
-    private static Media footStep;
 
     static {
         loadClickSound();
         loadVideo();
         loadSoundTrack();
         // Gọi phương thức tải video khi tải lớp Audio
-    }
-    public static void playFootStep(){
-        String fs = Links.FOOTSTEP_PATH;
-        footStep = new Media(new File(fs).toURI().toString());
-        if (footStep != null) {
-            MediaPlayer fsMediaPlayer = new MediaPlayer(footStep);
-            fsMediaPlayer.play();
-            fsMediaPlayer.setOnEndOfMedia(fsMediaPlayer::dispose);
-        }
     }
 
     private static void loadClickSound() {

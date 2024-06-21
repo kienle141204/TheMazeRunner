@@ -51,12 +51,6 @@ public class Item extends Region {
 
     }
 
-    public void respawnAt(double x, double y) {
-        setLayoutX(x);
-        setLayoutY(y);
-        hitbox.setX(x);
-        hitbox.setY(y);
-    }
 
     public Rectangle getHitbox() {
         return hitbox;

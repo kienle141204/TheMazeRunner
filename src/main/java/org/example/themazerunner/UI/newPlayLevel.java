@@ -21,7 +21,7 @@ import org.example.themazerunner.Maze.SpriteAnimation;
 import java.io.File;
 
 public class newPlayLevel {
-    private Scene sceneNewPlatlevel;
+    private Scene sceneNewPlaylevel;
     private ImageView character;
     private static double SPEED = 8;
     private int currentFrame = 0;
@@ -32,11 +32,15 @@ public class newPlayLevel {
     private Button game5;
     private Timeline timeline;
     private StackPane layout = new StackPane();
-    ImageView presseView;
+    private ImageView presseView;
     private Stage GamePlaystage;
     private MenuGame menuGame = new MenuGame();
     private Audio audio;
-
+    private Game1 playgame1 = new Game1();
+    private Game2 playgame2 = new Game2();
+    private Game3 playgame3 = new Game3();
+    private Game4 playgame4 = new Game4();
+    private Game5 playgame5 = new Game5();
 
 
     public newPlayLevel(Stage primaryStage, Scene scene1,StackPane layout)  {
@@ -51,7 +55,7 @@ public class newPlayLevel {
         backgroundView.fitHeightProperty().bind(primaryStage.heightProperty());
         layout.getChildren().add(backgroundView);
 
-        sceneNewPlatlevel = new Scene(layout, 1000, 750);
+        sceneNewPlaylevel = new Scene(layout, 1000, 750);
 
         // Tạo nút Back
         Button backButton = new Button();
@@ -62,7 +66,7 @@ public class newPlayLevel {
         layout.getChildren().add(imageView);
         layout.getChildren().add(backButton);
 
-        sceneNewPlatlevel.getStylesheets().add(Links.CSS_PATH);
+        sceneNewPlaylevel.getStylesheets().add(Links.CSS_PATH);
         imageView.setFitHeight(50);
         imageView.setFitWidth(100);
 
@@ -93,12 +97,8 @@ public class newPlayLevel {
         StackPane.setMargin(character,new Insets(0, 0, 240,100 ));
         layout.getChildren().add(character);
 
-        Game1 playgame1 = new Game1();
-        Game2 playgame2 = new Game2();
-        Game3 playgame3 = new Game3();
-        Game4 playgame4 = new Game4();
-        Game5 playgame5 = new Game5();
-        sceneNewPlatlevel.setOnKeyPressed(event -> {
+
+        sceneNewPlaylevel.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case W:
                     moveCharacter(0,-SPEED);
@@ -250,7 +250,7 @@ public class newPlayLevel {
             presseView.setVisible(false);
         }
     }
-    public void updateFrame(int... frameIndices) {
+    private void updateFrame(int... frameIndices) {
         currentFrame = (currentFrame + 1) % frameIndices.length;
         int frameIndex = frameIndices[currentFrame];
         String filePath = Links.FOOTSTEP_PATH;
@@ -291,6 +291,6 @@ public class newPlayLevel {
     }
 
     public Scene getScene() {
-        return sceneNewPlatlevel;
+        return sceneNewPlaylevel;
     }
 }

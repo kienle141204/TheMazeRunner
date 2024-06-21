@@ -27,6 +27,9 @@ public class MenuGame extends Application {
     public Scene scene1;
     private List<MediaPlayer> mediaPlayers = new ArrayList<>();
     private Audio audio;
+    private HelpScene helpScene;
+    private Member member;
+    private newPlayLevel playLevel;
 
     @Override
     public void start(Stage primaryStage) {
@@ -109,7 +112,7 @@ public class MenuGame extends Application {
         });
         //Khởi tạo scene2 , đây là cửa sổ mở ra khi ấn help
         // cài đặt một vào thứ cho scene2
-        HelpScene helpScene = new HelpScene(primaryStage, scene1);
+        helpScene = new HelpScene(primaryStage, scene1);
         //Scene scene2 = helpScene.getScene();
         // Hiệu ứng khi ấn nút help==button2 và exit==button3
         button2.setOnAction(event ->{
@@ -117,7 +120,7 @@ public class MenuGame extends Application {
             primaryStage.setScene(helpScene.getScene());
         });
         //ấn và tên game hiện ra tên thành viên
-        Member member = new Member(primaryStage, scene1);
+        member = new Member(primaryStage, scene1);
 
         button.setOnAction(event->{
             audio.playClickSound();
@@ -138,7 +141,7 @@ public class MenuGame extends Application {
                 primaryStage.show();
                 videoStage.close();
                 StackPane layout = new StackPane();
-                newPlayLevel playLevel = new newPlayLevel(primaryStage, scene1,layout);
+                playLevel = new newPlayLevel(primaryStage, scene1,layout);
                 playLevel.setPlayGameButton();
                 playLevel.setCharacter(primaryStage);
                 primaryStage.setScene(playLevel.getScene());
@@ -178,7 +181,7 @@ public class MenuGame extends Application {
         // Bắt đầu phát âm thanh
         mediaPlayer.play();
     }
-    public void stopAllMediaPlayers() {
+    private void stopAllMediaPlayers() {
         for (MediaPlayer mediaPlayer : mediaPlayers) {
             if (mediaPlayer != null) {
                 System.out.println("Stopping media player");

@@ -293,7 +293,7 @@ public class Main2 extends Application {
             timer.stop();
 
             //showWinMessage(primaryStage);
-            if(mazeData == Data.mazeData1){
+            if(mazeData == Data.mazeData4){
                 showWinMessage(primaryStage);
             }
             else{

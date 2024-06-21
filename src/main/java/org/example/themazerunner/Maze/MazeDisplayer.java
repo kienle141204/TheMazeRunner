@@ -21,8 +21,6 @@ import org.example.themazerunner.UI.Audio;
 public class MazeDisplayer
 {
 	public static  int NUM_OF_FRAMES = 3;
-	private static final int WIDTH = 1000;
-	private static final int HEIGHT = 750;
 	private int RECT_SIZE;
 	private ImageView character;
 	private ImageView gate;
@@ -32,6 +30,7 @@ public class MazeDisplayer
 	private int [][] mazeData ;
 	private int currentFrame = 0;
 	private Timeline timeline ;
+	private SpriteAnimation animation;
 
 	private Audio audio;
 
@@ -60,8 +59,7 @@ public class MazeDisplayer
 	private void drawCharacter()
 	{
 		character = new ImageView(new Image("file:E:/code/TheMazeRunner/src/main/java/image/hold1.png"));
-		SpriteAnimation animation = new SpriteAnimation(character,
-				Duration.millis(1000), 3, 32, 32);
+		animation = new SpriteAnimation(character,Duration.millis(1000), 3, 32, 32);
 		animation.setCycleCount(javafx.animation.Animation.INDEFINITE);
 		animation.play();
 		character.setFitWidth(RECT_SIZE);

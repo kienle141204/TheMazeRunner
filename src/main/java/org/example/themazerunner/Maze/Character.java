@@ -11,7 +11,7 @@ import javafx.util.Duration;
 import javafx.scene.shape.Rectangle;
 
 public class Character extends Pane {
-    ImageView imageView;
+    private ImageView imageView;
     private double x; // Tọa độ x của nhân vật
     private double y; // Tọa độ y của nhân vật
     int count = 3;
@@ -23,9 +23,9 @@ public class Character extends Pane {
     private Rectangle visionBox;
     private static final double VISION_WIDTH = 50; // Width of the vision box
     private static final double VISION_HEIGHT = 50;
-    MazeDrawer mazeDrawer; // Thêm biến tham chiếu đến MazeDrawer
+    private MazeDrawer mazeDrawer; // Thêm biến tham chiếu đến MazeDrawer
     private Rectangle hitbox;
-    SpriteAnimation1 animation;
+    public SpriteAnimation1 animation;
 
     public Character(ImageView imageView, MazeDrawer mazeDrawer) {
         this.mazeDrawer = mazeDrawer; // Set the mazeDrawer
